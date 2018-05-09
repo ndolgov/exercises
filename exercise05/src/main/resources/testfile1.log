@@ -1,0 +1,2 @@
+Aug 15 00:00:00 a14.sf.smle.co snp 2016-08-15 00:00:00,000 [play-thread-49] INFO controllers - POST data
+Aug 15 00:00:01 be1-1.sf.smle.co snp 2016-08-15 00:00:01,390 [play-thread-39] ERROR handler - shard8 query error

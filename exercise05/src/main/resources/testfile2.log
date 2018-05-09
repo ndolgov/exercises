@@ -1,0 +1,8 @@
+Aug 15 00:00:00 a14.sf.smle.co snp 2016-08-15 00:00:00,000 [play-thread-49] INFO controllers - POST data
+Aug 15 01:00:01 be1-1.sf.smle.co snp 2016-08-15 00:00:01,390 [play-thread-39] ERROR handler - shard8 query error
+Aug 15 08:00:00 a14.sf.smle.co snp 2016-08-15 00:00:00,000 [play-thread-49] INFO controllers - POST data
+Aug 15 09:00:01 be1-2.sf.smle.co snp 2016-08-15 00:00:01,390 [play-thread-39] ERROR handler - shard8 query error
+Aug 15 09:01:01 be1-3.sf.smle.co snp 2016-08-15 00:00:01,390 [play-thread-39] INFO controllers - POST data
+Aug 15 09:01:01 be1-4.sf.smle.co snp 2016-08-15 00:00:01,390 [play-thread-39] ERROR handler - shard8 query error
+Aug 15 23:00:01 be1-1.sf.smle.co snp 2016-08-15 00:00:01,390 [play-thread-39] ERROR handler - shard7 query error
+Aug 15 23:00:01 be1-1.sf.smle.co snp 2016-08-15 00:00:01,390 [play-thread-39] INFO controllers - POST data
