@@ -1,5 +1,7 @@
 package net.ndolgov.manalytics
 
+import org.apache.spark.sql.DataFrame
+import org.apache.spark.sql.functions.col
 import org.scalatest.{Assertions, FlatSpec}
 
 /** Trigger marketing report preparation */
@@ -23,6 +25,16 @@ final class ReportTestSuit extends FlatSpec with Assertions {
     assert(dfAttributionProjection.count() == 6)
 
     println("Purchase attribution with UDAF")
+    dfAttributionProjection.show()
+  }
+
+  "Task #1.3 Purchase attribution" should "be built with plain SQL" in {
+    createTempViewsFromCsvFiles()
+
+    val dfAttributionProjection = PlainSqlPurchaseAttribution.attributeWithPlainSql(spark)
+    assert(dfAttributionProjection.count() == 6)
+
+    println("Purchase attribution with plain SQL")
     dfAttributionProjection.show()
   }
 
@@ -52,6 +64,26 @@ final class ReportTestSuit extends FlatSpec with Assertions {
     assert(dfChannelsEngagementPlain.count() == 2)
     println("Most popular channels by campaign with plain SQL")
     dfChannelsEngagementPlain.show()
+  }
+
+  "Task #2.3 Most popular channels by campaign report" should "be built with a single plain SQL pass" in {
+    createTempViewsFromCsvFiles()
+
+    val dfChannelsEngagement = PlainSqlPurchaseAttribution.channelsEngagement(spark)
+    assert(dfChannelsEngagement.count() == 2)
+    println("Most popular channels by campaign with a single plain SQL pass")
+    dfChannelsEngagement.show()
+  }
+
+  private def createTempViewsFromCsvFiles(): Unit = {
+    CsvLoader.loadClickStream(CSV_ROOT, spark)
+      .withColumn(CampaignId, col(s"$Attributes.campaign_id"))
+      .withColumn(ChannelId, col(s"$Attributes.channel_id"))
+      .withColumn(PurchaseId, col(s"$Attributes.purchase_id"))
+      .createOrReplaceTempView("clickstream")
+
+    val dfChannelsEngagementPlain = CsvLoader.loadPurchases(CSV_ROOT, spark)
+      .createOrReplaceTempView("purchases")
   }
 }
 
